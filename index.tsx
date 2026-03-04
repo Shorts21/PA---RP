@@ -285,7 +285,7 @@ const App = () => {
         const findIdxKey = (keys) => headers.findIndex(h => keys.some(k => h.includes(k)));
         const idxCompany = findIdxKey(['EMPRESA', 'CLIENTE', 'NOME']);
         const idxSector = findIdxKey(['SETOR', 'UNIDADE', 'ÁREA']);
-        const idxCity = findIdxKey(['CIDADE', 'LOCAL', 'UF']);
+        const idxCity = findIdxKey(['CIDADE', 'LOCAL', 'UF', 'MUNICÍPIO', 'MUNICIPIO', 'Base']);
         const idxRole = findIdxKey(['CARGO', 'FUNÇÃO', 'ATIVIDADE']);
         const idxQuestions = {};
         for (let i = 1; i <= 26; i++) { idxQuestions[`q${i}`] = headers.findIndex(h => h.startsWith(`${i}.`) || h.startsWith(`${i}-`) || h.startsWith(`${i} `)); }
