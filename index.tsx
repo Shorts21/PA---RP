@@ -280,7 +280,8 @@ const App = () => {
         const sheet = workbook.Sheets[sheetName];
 
         let sheetCity = 'N/A';
-        const cityMatch = sheetName.match(/\(([^)]+)\)/);
+        // Excel tab names are max 31 chars so the closing parenthesis might be truncated
+        const cityMatch = sheetName.match(/\(([^)]*)/);
         if (cityMatch && cityMatch[1]) {
           sheetCity = cityMatch[1].trim();
         }
