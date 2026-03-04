@@ -278,6 +278,13 @@ const App = () => {
       let allPayloads = [];
       for (const sheetName of workbook.SheetNames) {
         const sheet = workbook.Sheets[sheetName];
+
+        let sheetCity = 'N/A';
+        const cityMatch = sheetName.match(/\(([^)]+)\)/);
+        if (cityMatch && cityMatch[1]) {
+          sheetCity = cityMatch[1].trim();
+        }
+
         const rawRows = XLSX.utils.sheet_to_json(sheet, { header: 1 }) as any[][];
         if (rawRows.length < 2) continue;
         const headers = rawRows[0].map(h => String(h || '').trim().toUpperCase());
@@ -296,7 +303,7 @@ const App = () => {
             assessment_date: new Date().toISOString(),
             company: norm(r[idxCompany] || 'N/A'),
             sector: norm(r[idxSector] || 'N/A'),
-            city: norm(r[idxCity] || 'N/A'),
+            city: norm(r[idxCity] || sheetCity),
             role: norm(r[idxRole] || 'N/A')
           };
           for (let i = 1; i <= 26; i++) { const val = r[idxQuestions[`q${i}`]]; const match = String(val || '').match(/(\d)/); item[`q${i}`] = match ? parseInt(match[1]) : 3; }
